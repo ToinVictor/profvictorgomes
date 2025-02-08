@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Professor Victor</title>
+    <!-- Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">📚 Professor Victor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#up">Materiais</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Seção Hero-->
+        <header class="hero d-flex align-items-center text-white text-center">
+            <div class="container" id="up">
+                <h1 class="hero-title">Bem-vindo ao Mundo da Física! ⚛️</h1>
+                <p class="hero-subtitle">Explore conceitos, resolva desafios e conquiste o conhecimento.</p>
+                <a href="javascript:void(0);" class="btn btn-light btn-lg hero-btn" id="toggleMateriais">📂 Acesse os Materiais</a>
+            </div>
+        </header>
+
+   
+
+    <!-- Seção Materiais -->
+    <section id="materiais" class="py-5 d-none">
+        <div class="container">
+            <h2 class="text-center mb-4">📂 Materiais Disponíveis</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">📖 Matemática</h5>
+                            <p class="card-text" style="font-size: 11pt;">Material completo com teoria e exercícios de Matemática.</p>
+                            <button class="btn btn-primary btn-mostrar" data-target="math">Acessar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">⚛️ Física</h5>
+                            <p class="card-text">Material completo com teoria e exercícios de Física.</p>
+                            <button class="btn btn-primary btn-mostrar" data-target="fis">Acessar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">📘 Exercícios Resolvidos</h5>
+                            <p class="card-text">Questões resolvidas passo a passo.</p>
+                            <button class="btn btn-primary btn-mostrar" data-target="extraMateriais">Acessar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Materiais Adicionais -->
+            <div class="row mt-4 d-none" id="math">
+                <div class="col-md-12">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">📚 Matemática Teoria e Prática</h5>
+                            <p class="card-text">Aqui estão todos os materiais de apoio disponíveis.</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="assests/material/math/potFac.pdf" class="btn btn-success d-block mb-2">Potência: Fácil</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="row mt-4 d-none" id="fis">
+                <div class="col-md-12">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">📚 Física Teoria e Prática</h5>
+                            <p class="card-text">Aqui estão todos os materiais de apoio disponíveis.</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 d-none" id="extraMateriais">
+                <div class="col-md-12">
+                    <div class="card shadow-lg text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">📘 Exercícios Resolvidos</h5>
+                            <p class="card-text">Questões resolvidas passo a passo.</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                        <li><a href="#" class="btn btn-success d-block mb-2">Em Breve</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="sobre" class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold">Sobre</h2>
+            <div class="row align-items-center mt-4">
+                <div class="col-md-6">
+                    <img src="assests/img/eu.jpg" class="img-fluid rounded shadow" alt="Imagem sobre física">
+                </div>
+                <div class="col-md-6 text-start">
+                    <p class="lead">
+                        Olá! Me chamo Victor Gomes e sou estudante de Física no IFCE – Campus Sobral. Sou professor de Física e Matemática, apaixonado por ensinar e compartilhar conhecimento de forma acessível e prática.  
+                    </p>
+                    <p>
+                        Aqui, você encontrará materiais didáticos, exercícios comentados e recursos exclusivos para aprofundar seus estudos. Meu objetivo é tornar a Física e a Matemática mais compreensíveis e interessantes para todos.  
+                    </p>
+                    <p>
+                        Explore o conteúdo disponível e aproveite ao máximo sua jornada de aprendizado. Qualquer dúvida, estou por aqui para ajudar! 🚀  
+                    </p>
+                </div>                
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center">Contato</h2>
+            <p class="text-center">Entre em contato preenchendo o formulário abaixo.</p>
+            <form action="https://formspree.io/f/mvggqagb" method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mensagem" class="form-label">Mensagem</label>
+                    <textarea class="form-control" id="mensagem" name="mensagem" rows="4" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+        <footer class="footer bg-dark text-white text-center py-5">
+            <div class="container">
+                <div class="row">
+                    <!-- Navegação -->
+                    <div class="col-md-4">
+                        <h5 class="footer-title">Navegação</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#sobre" class="footer-link">Sobre</a></li>
+                            <li><a href="#up" class="footer-link">Materiais</a></li>
+                            <li><a href="#contato" class="footer-link">Contato</a></li>
+                        </ul>
+                    </div>
+                    <!-- Contato -->
+                    <div class="col-md-4">
+                        <h5 class="footer-title">Contato</h5>
+                        <p><a href="#contato" class="footer-link" style="font-size: 15ptpt;">Email</a></p>
+                        <p><a href="https://wa.me/88981013973" class="social-link" style="font-size: 12pt;"><i class="fab fa-whatsapp"></i> Enviar mensagem</a></p>
+                    </div>
+                    <!-- Redes Sociais -->
+                    <div class="col-md-4">
+                        <h5 class="footer-title">Redes Sociais</h5>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/toin_victor?igsh=MTFlbnhnbGI2b3NiYQ==" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@toin_victor" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Separador -->
+                <hr class="footer-separator">
+                <p class="mb-0">&copy; 2025 Professor Victor. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
