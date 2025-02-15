@@ -1,10 +1,8 @@
-/* Estilos Gerais */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
 }
 
-/* Cabeçalho */
 header {
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
@@ -13,7 +11,7 @@ header {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar */
+
 .navbar {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -22,19 +20,18 @@ header {
     font-weight: 500;
 }
 
-/* Cards */
-.card {
+
+.material-card {
     border: none;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.card:hover {
+.material-card:hover {
     transform: scale(1.05);
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Rodapé */
 footer {
     background: #222;
     color: white;
