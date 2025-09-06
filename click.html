@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador de Cliques</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN para estilização rápida -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Inter para o texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,12 +21,15 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
 
+    <!-- Mensagem de carregamento inicial -->
     <div id="loading" class="text-gray-500 font-semibold mb-4">Carregando dados...</div>
     
+    <!-- Container principal com os botões e a contagem -->
     <div id="main-container" class="hidden w-full max-w-2xl bg-white p-8 rounded-2xl shadow-xl text-center">
         <h1 class="text-4xl font-bold mb-4 text-gray-800">Clique em 'Sim' ou 'Não'</h1>
         <p class="text-lg text-gray-600 mb-8">Essa contagem é atualizada em tempo real para todos os usuários.</p>
         
+        <!-- Contadores de cliques -->
         <div class="flex flex-col sm:flex-row justify-center gap-6 mb-8">
             <div class="flex flex-col items-center p-6 bg-green-50 rounded-xl w-full sm:w-1/2">
                 <i class="fa-solid fa-thumbs-up text-5xl text-green-600 mb-4"></i>
@@ -39,6 +44,7 @@
             </div>
         </div>
         
+        <!-- Botões de interação -->
         <div class="flex flex-col sm:flex-row gap-4">
             <button id="sim-btn" class="flex-1 bg-green-600 text-white font-bold py-4 rounded-xl text-xl hover:bg-green-700 transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
                 <i class="fa-solid fa-check mr-2"></i> Sim
@@ -55,17 +61,15 @@
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // IMPORTANTE: Cole sua própria configuração do Firebase aqui!
-        // Você pode encontrar isso nas configurações do seu projeto do Firebase.
+        // Sua configuração do Firebase já está aqui!
         const firebaseConfig = {
-  apiKey: "AIzaSyAF6KDF-JOU7tWU9yjAun3qR9Y6halpZeQ",
-  authDomain: "contador-d9839.firebaseapp.com",
-  projectId: "contador-d9839",
-  storageBucket: "contador-d9839.firebasestorage.app",
-  messagingSenderId: "1099065672343",
-  appId: "1:1099065672343:web:88b9ca0885f4e5cda7dfd2"
-};
-
+            apiKey: "AIzaSyAF6KDF-JOU7tWU9yjAun3qR9Y6halpZeQ",
+            authDomain: "contador-d9839.firebaseapp.com",
+            projectId: "contador-d9839",
+            storageBucket: "contador-d9839.firebasestorage.app",
+            messagingSenderId: "1099065672343",
+            appId: "1:1099065672343:web:88b9ca0885f4e5cda7dfd2"
+        };
         
         // Use um ID de aplicativo fixo para o caminho do Firestore
         const appId = "my-click-app";
@@ -87,7 +91,6 @@
                     setupRealtimeListener();
                 } catch (error) {
                     console.error("Erro na autenticação:", error);
-                    // Lembre-se: não use 'alert()' em produção.
                 }
             };
             
