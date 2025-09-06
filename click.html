@@ -52,13 +52,23 @@
     <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Variáveis globais do ambiente de desenvolvimento
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // IMPORTANTE: Cole sua própria configuração do Firebase aqui!
+        // Você pode encontrar isso nas configurações do seu projeto do Firebase.
+        const firebaseConfig = {
+  apiKey: "AIzaSyAF6KDF-JOU7tWU9yjAun3qR9Y6halpZeQ",
+  authDomain: "contador-d9839.firebaseapp.com",
+  projectId: "contador-d9839",
+  storageBucket: "contador-d9839.firebasestorage.app",
+  messagingSenderId: "1099065672343",
+  appId: "1:1099065672343:web:88b9ca0885f4e5cda7dfd2"
+};
+
+        
+        // Use um ID de aplicativo fixo para o caminho do Firestore
+        const appId = "my-click-app";
         
         const loadingElement = document.getElementById('loading');
         const mainContainer = document.getElementById('main-container');
@@ -70,23 +80,17 @@
             db = getFirestore(app);
             auth = getAuth(app);
 
-            // Autenticação do usuário (anônima ou com token)
             const authenticateUser = async () => {
                 try {
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                    console.log("Usuário autenticado com sucesso.");
+                    await signInAnonymously(auth);
+                    console.log("Usuário autenticado anonimamente.");
                     setupRealtimeListener();
                 } catch (error) {
                     console.error("Erro na autenticação:", error);
-                    alert("Erro ao autenticar. Por favor, recarregue a página.");
+                    // Lembre-se: não use 'alert()' em produção.
                 }
             };
             
-            // Listener de atualizações em tempo real
             const setupRealtimeListener = () => {
                 const docRef = doc(db, `artifacts/${appId}/public/data/click_counts`, "global_counts");
                 
@@ -103,11 +107,9 @@
                     mainContainer.classList.remove('hidden');
                 }, (error) => {
                     console.error("Erro ao ouvir atualizações:", error);
-                    alert("Erro de conexão em tempo real. Recarregue a página.");
                 });
             };
             
-            // Funções para registrar os cliques
             const registerClick = async (type) => {
                 const docRef = doc(db, `artifacts/${appId}/public/data/click_counts`, "global_counts");
                 try {
@@ -116,20 +118,16 @@
                     });
                 } catch (error) {
                     console.error("Erro ao atualizar o documento:", error);
-                    alert("Erro ao registrar seu clique. Tente novamente.");
                 }
             };
             
-            // Adicionar listeners de eventos aos botões
             document.getElementById('sim-btn').addEventListener('click', () => registerClick('sim'));
             document.getElementById('nao-btn').addEventListener('click', () => registerClick('nao'));
             
-            // Iniciar a autenticação
             authenticateUser();
 
         } catch (error) {
             console.error("Erro na inicialização do Firebase:", error);
-            alert("Erro ao carregar a aplicação. Verifique a configuração do Firebase.");
         }
     </script>
 </body>
