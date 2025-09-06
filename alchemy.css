@@ -1,0 +1,290 @@
+/* === SISTEMA DE ALCHEMIA === */
+
+/* Estilo para o container principal */
+.alchemy-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .alchemy-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilo para as seções de alquimia */
+.alchemy-recipes, 
+.alchemy-details, 
+.alchemy-materials {
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo para a lista de receitas */
+.recipes-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.recipe-card {
+    background: rgba(50, 50, 60, 0.8);
+    border-radius: var(--border-radius-sm);
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recipe-card:hover:not(.locked) {
+    background: rgba(60, 60, 70, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.recipe-card.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.4);
+}
+
+.recipe-card.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+    filter: grayscale(0.8);
+}
+
+.recipe-card.locked::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.recipe-icon {
+    font-size: 1.5rem;
+}
+
+.recipe-name {
+    font-weight: bold;
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.recipe-level {
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+}
+
+/* Estilo para os detalhes da receita */
+.recipe-details {
+    min-height: 200px;
+}
+
+.recipe-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.recipe-icon-large {
+    font-size: 2.5rem;
+}
+
+.recipe-info {
+    margin: 1rem 0;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-label {
+    color: var(--text-secondary);
+}
+
+.info-value {
+    font-weight: bold;
+}
+
+.ingredients-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.ingredient {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-sm);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.ingredient.missing {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+
+.ingredient-icon {
+    font-size: 1.2rem;
+}
+
+.ingredient-name {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.ingredient-quantity {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Estilo para os controles de criação */
+.crafting-controls {
+    margin-top: 1rem;
+}
+
+.btn-craft {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.crafting-progress {
+    margin-top: 1rem;
+    display: none;
+}
+
+.progress-bar {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.3s ease;
+}
+
+#crafting-time {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Estilo para a lista de materiais */
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.8rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.material-card {
+    background: rgba(60, 60, 70, 0.8);
+    border-radius: var(--border-radius-sm);
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.material-icon {
+    font-size: 1.8rem;
+}
+
+.material-name {
+    font-size: 0.85rem;
+    text-align: center;
+    word-break: break-word;
+}
+
+.material-quantity {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--warning);
+}
+
+/* Estilo para o card de alquimia na cidade */
+.city-card[data-location="alchemy"] {
+    position: relative;
+}
+
+.city-card[data-location="alchemy"].locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+    filter: grayscale(0.8);
+}
+
+.city-card[data-location="alchemy"].locked::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.city-card[data-location="alchemy"].locked .city-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.city-card[data-location="alchemy"].locked .city-level-req {
+    position: relative;
+    z-index: 1;
+    font-size: 0.8rem;
+    color: var(--warning);
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+/* Estilo para quando estiver criando uma poção */
+.alchemy-crafting .recipe-card {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Animação para quando estiver criando */
+@keyframes craftingPulse {
+    0% { box-shadow: 0 0 5px rgba(255, 87, 34, 0.3); }
+    50% { box-shadow: 0 0 15px rgba(255, 87, 34, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(255, 87, 34, 0.3); }
+}
+
+.crafting-in-progress {
+    animation: craftingPulse 2s infinite;
+}

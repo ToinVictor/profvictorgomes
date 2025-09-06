@@ -1,0 +1,301 @@
+/* inventory.css - Versão atualizada */
+
+/* Tela de Inventário */
+#inventory-screen {
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+}
+
+.inventory-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.inventory-tab {
+    padding: 0.8rem 1.2rem;
+    background: rgba(40, 40, 40, 0.8);
+    border: none;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    color: var(--text-secondary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    flex: 1;
+    text-align: center;
+}
+
+.inventory-tab.active {
+    background: rgba(70, 70, 70, 0.8);
+    color: var(--warning);
+    border-bottom: 2px solid var(--warning);
+}
+
+.inventory-content {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Itens equipados */
+.equipped-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.equipped-title {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Itens do inventário */
+.inventory-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(40, 40, 40, 0.8);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+    transition: var(--transition);
+    border-left: 3px solid var(--primary);
+}
+
+.inventory-item.equipped {
+    border-left-color: var(--success);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.inventory-item:hover {
+    background: rgba(60, 60, 60, 0.8);
+    transform: translateY(-2px);
+}
+
+.item-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-info h5 {
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
+}
+
+.item-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.btn-equip, .btn-use, .btn-unequip {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    margin-top: 0.3rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-equip {
+    background: rgba(0, 188, 212, 0.3);
+    color: var(--accent);
+}
+
+.btn-equip:hover {
+    background: rgba(0, 188, 212, 0.5);
+}
+
+.btn-use {
+    background: rgba(139, 195, 74, 0.3);
+    color: var(--success);
+}
+
+.btn-use:hover {
+    background: rgba(139, 195, 74, 0.5);
+}
+
+.btn-unequip {
+    background: rgba(244, 67, 54, 0.3);
+    color: var(--danger);
+}
+
+.btn-unequip:hover {
+    background: rgba(244, 67, 54, 0.5);
+}
+
+.empty-inventory {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+}
+
+/* Categorias de itens */
+.inventory-category {
+    margin-bottom: 1.5rem;
+}
+
+.category-title {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .inventory-tabs {
+        flex-direction: column;
+    }
+    
+    .inventory-tab {
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 0.5rem;
+    }
+    
+    .inventory-content {
+        max-height: 55vh;
+    }
+}
+
+/* Adicione ao final do inventory.css */
+.btn-sell {
+    background: linear-gradient(135deg, #795548, #5D4037);
+    color: white;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.sell-screen {
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+}
+
+.sell-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(60, 60, 60, 0.8);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.8rem;
+    transition: var(--transition);
+    border-left: 3px solid var(--warning);
+}
+
+.sell-item-info {
+    flex-grow: 1;
+}
+
+.sell-item-info h5 {
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
+}
+
+.sell-item-value {
+    font-size: 0.9rem;
+    color: var(--warning);
+    font-weight: bold;
+}
+
+.btn-sell-item {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    background: rgba(255, 193, 7, 0.3);
+    color: var(--warning);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-sell-item:hover {
+    background: rgba(255, 193, 7, 0.5);
+}
+
+.sell-total {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.sell-total span {
+    color: var(--warning);
+}
+
+.sell-item.sold-out {
+    opacity: 0.5;
+    pointer-events: none;
+    text-decoration: line-through;
+}
+
+/*FUNÇÃO QUANTIDADE NO INVENTAARIO*/
+.item-quantity {
+    color: var(--warning);
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.sell-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.quantity-selector input {
+    width: 40px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 4px;
+    padding: 0.2rem;
+}
+
+.btn-quantity {
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-quantity:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.material-item {
+    background-color: rgba(200, 200, 100, 0.1);
+    border-left: 3px solid #ffcc00;
+}
+
+.material-item .item-icon {
+    color: #ffcc00;
+}

@@ -1,0 +1,32 @@
+XP-ANTIGO:
+
+function addXp(amount) {
+     // Aplica bônus de XP se for um mago
+    if (player.class === 'mage') {
+        amount = Math.floor(amount * (1 + classBonuses.mage.bonuses.xpMultiplier));
+    }
+    player.xp += amount;
+    let leveledUp = false;
+    checkQuestProgress("earn_xp", { amount: amount });
+
+    while (player.xp >= player.maxXp && player.maxXp > 0) {
+        player.level++;
+        player.xp -= player.maxXp;
+        //player.maxXp = Math.floor(player.maxXp * 1.5); Antigo
+        player.maxXp = player.level * player.level * 5 + player.level * 10; //NOVO
+
+        const gains = getLevelUpStats(player.level);
+        player.maxHp += gains.maxHp;
+        player.hp = player.maxHp;
+        player.damage += gains.damage;
+        player.defense += gains.defense;
+
+        // ✅ Energia restaurada ao subir de nível
+        player.stamina = player.maxStamina;
+
+        leveledUp = true;
+        alert(`LEVEL UP! Nível ${player.level} alcançado!\n+${gains.maxHp} HP\n+${gains.damage} ATK\n+${gains.defense} DEF\n⚡ Energia restaurada!`);
+    }
+
+    updateStatus();
+}

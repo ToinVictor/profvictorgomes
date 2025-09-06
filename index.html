@@ -1,84 +1,600 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Airton Mendes</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EPIC RPG Mobile</title>
+
+  <!-- Estilos externos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="alchemy.css">
+  <link rel="stylesheet" href="achievements.css">
+  <link rel="stylesheet" href="inventory.css">
 </head>
-<body>
-    <header class="bg-primary text-white text-center py-4 shadow-sm">
-        <h1 class="fw-bold">Professor Airton Mendes</h1>
-        <p class="lead">Material didático para estudantes</p>
+<body class="game-bg">
+
+  <!-- TELA DE INÍCIO -->
+  <div class="game-overlay" id="name-screen">
+    <div class="game-modal">
+      <div class="game-modal-header">
+        <h1 class="game-logo">EPIC RPG</h1>
+      </div>
+      <div class="game-modal-body">
+        <div class="form-group">
+          <label for="player-name-input" class="form-label">Nome do Herói</label>
+          <input type="text" id="player-name-input" class="form-control game-input" placeholder="Digite seu nome" aria-label="Campo para digitar seu nome">
+        </div>
+        <button onclick="setPlayerName()" class="btn btn-game-start btn-block">
+          <span class="btn-icon">⚔️</span> INICIAR JORNADA
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA DE AVATAR -->
+  <div class="game-overlay" id="avatar-screen">
+    <div class="game-modal">
+      <div class="game-modal-header">
+        <h2 class="game-subtitle">ESCOLHA SEU AVATAR</h2>
+      </div>
+      <div class="game-modal-body">
+        <div class="avatar-grid">
+          <!-- Guerreiro -->
+          <div class="avatar-card" onclick="selectAvatar('assets/avatars/warrior.jpeg')">
+            <div class="avatar-img-container">
+              <img src="assets/avatars/warrior.jpeg" alt="Guerreiro" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+              <h3 class="avatar-name">Guerreiro</h3>
+              <p class="avatar-desc">Especialista em combate corpo a corpo</p>
+            </div>
+          </div>
+          
+          <!-- Mago -->
+          <div class="avatar-card" onclick="selectAvatar('assets/avatars/mage.jpg')">
+            <div class="avatar-img-container">
+              <img src="assets/avatars/mage.jpg" alt="Mago" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+              <h3 class="avatar-name">Mago</h3>
+              <p class="avatar-desc">Mestre das artes arcanas</p>
+            </div>
+          </div>
+          
+          <!-- Arqueiro -->
+          <div class="avatar-card" onclick="selectAvatar('assets/avatars/archer.jpg')">
+            <div class="avatar-img-container">
+              <img src="assets/avatars/archer.jpg" alt="Arqueiro" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+              <h3 class="avatar-name">Arqueiro</h3>
+              <p class="avatar-desc">Precisão mortal à distância</p>
+            </div>
+          </div>
+          
+          <!-- Ladino -->
+          <div class="avatar-card" onclick="selectAvatar('assets/avatars/rogue.jpg')">
+            <div class="avatar-img-container">
+              <img src="assets/avatars/rogue.jpg" alt="Ladino" class="avatar-img">
+            </div>
+            <div class="avatar-info">
+              <h3 class="avatar-name">Ladino</h3>
+              <p class="avatar-desc">Mestre da furtividade</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Upload personalizado -->
+        <div class="custom-avatar-section">
+          <h4 class="section-title">OU USE SUA PRÓPRIA IMAGEM</h4>
+          <div class="upload-container">
+            <label for="avatar-upload" class="btn btn-upload">
+              <span class="btn-icon">📤</span> CARREGAR IMAGEM
+            </label>
+            <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+          </div>
+          <div id="avatar-preview" class="preview-container">
+            <img id="preview-img" src="#" alt="Seu avatar" class="preview-img">
+          </div>
+        </div>
+        
+        <button onclick="confirmAvatar()" class="btn btn-game-confirm btn-block">
+          <span class="btn-icon">✔️</span> CONFIRMAR ESCOLHA
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARRA SUPERIOR -->
+    <header class="game-header">
+      <div class="header-content">
+        <div class="header-brand">
+          <span class="game-icon">⚔️</span>
+          <h1 class="game-title">EPIC RPG</h1>
+        </div>
+        <div class="header-stats">
+          <span class="stat-item" id="quest-indicator">
+            <span class="stat-icon">📜</span>
+            <span class="stat-value">0/2</span>
+          </span>
+          <button onclick="saveGame()" class="btn btn-save" aria-label="Salvar progresso">
+            <span class="btn-icon">💾</span>
+            <span class="btn-text">Salvar</span>
+          </button>
+          <button onclick="resetGame()" class="btn btn-reset" aria-label="Reiniciar jogo">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">Reiniciar</span>
+          </button>
+        </div>
+      </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">Início</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="fundamental.html">Ensino Fundamental</a></li>
-                    <li class="nav-item"><a class="nav-link" href="medio.html">Ensino Médio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="superior.html">Ensino Superior</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container my-5">
-        <h2 class="text-center text-secondary">Materiais Disponíveis</h2>
-        
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">Ensino Fundamental</h5>
-                        <p class="card-text">Acesse conteúdos para estudantes do Ensino Fundamental.</p>
-                        <a href="fundamental.html" class="btn btn-primary">Acessar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-success">Ensino Médio</h5>
-                        <p class="card-text">Materiais didáticos para Ensino Médio.</p>
-                        <a href="medio.html" class="btn btn-success">Acessar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-danger">Ensino Superior</h5>
-                        <p class="card-text">Recursos acadêmicos para Ensino Superior.</p>
-                        <a href="superior.html" class="btn btn-danger">Acessar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-dark text-white text-center py-4">
-        <div>
-            <h3 class="text-secondary">Redes Sociais</h3>
-            <p>Me acompanhe nas Redes Sociais.</p>
-            <a href="#" class="btn btn-outline-success me-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#" class="btn btn-outline-danger me-2"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="#" class="btn btn-outline-warning"><i class="fab fa-youtube"></i> YouTube</a>
-        </div>
-        <p class="mt-3">&copy;Site desenvolvido por <a href="mailto:victorgp314@gmail.com" class="text-white">Victor Gomes</a></p>
-    </footer>
+  <!-- TELA PRINCIPAL -->
+  <main class="game-container" id="game-screen">
     
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- PERFIL DO JOGADOR -->
+      <section class="player-profile">
+        <div class="profile-avatar">
+          <img src="assets/avatars/default.png" class="player-avatar" alt="Avatar do jogador" id="player-avatar-img">
+        </div>
+        <div class="profile-info">
+          <h2 class="player-name" id="player-name">-</h2>
+          <div class="player-level">
+            <span class="level-icon">⭐</span>
+            <span class="level-text">Nível <span id="player-level">1</span></span>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-item">
+            <span class="stat-icon">❤️</span>
+            <span class="stat-value"><span id="player-hp">20</span>/<span id="player-max-hp">20</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">⚡</span>
+            <span class="stat-value"><span id="player-stamina">20</span>/<span id="player-max-stamina">20</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">💰</span>
+            <span class="stat-value"><span id="player-coins">0</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">⚔️</span>
+            <span class="stat-value"><span id="player-damage">2</span></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">🛡️</span>
+            <span class="stat-value"><span id="player-defense">0</span></span>
+          </div>
+          <div>
+            <button onclick="showClassBenefits()" class="btn btn-class-info">
+                <span class="btn-icon">ℹ️</span> CLASSE
+            </button>
+          </div>
+        </div>
+        <div class="xp-bar-container">
+          <div class="xp-bar-label">XP: <span id="player-xp">0</span>/<span id="player-max-xp">4</span></div>
+          <div class="progress xp-bar">
+            <div id="xp-progress" class="progress-bar progress-bar-striped bg-warning" role="progressbar"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="active-effects" id="active-effects">
+      <!-- Buffs ativos serão listados aqui -->
+
+          <!-- MENU PRINCIPAL -->
+          <section class="game-menu" id="main-menu">
+              <div class="menu-grid">
+                  <!-- Batalha -->
+                  <button onclick="showScreen('arena-select')" class="menu-item btn-battle">
+                      <div class="menu-icon">⚔️</div>
+                      <div class="menu-text">Batalhar</div>
+                  </button>
+                  
+                  <!-- Cidade -->
+                  <button onclick="showScreen('city')" class="menu-item btn-city">
+                      <div class="menu-icon">🏙️</div>
+                      <div class="menu-text">Cidade</div>
+                  </button>
+                  
+                  <!-- Missões -->
+                  <button onclick="showScreen('quests')" class="menu-item btn-quests">
+                      <div class="menu-icon">📜</div>
+                      <div class="menu-text">Missões</div>
+                  </button>
+                  
+                  <!-- Inventário -->
+                  <button onclick="showScreen('inventory')" class="menu-item btn-inventory">
+                      <div class="menu-icon">🎒</div>
+                      <div class="menu-text">Inventário</div>
+                  </button>
+              </div>
+          </section>
+
+          <!-- TELA DE CONQUISTAS -->
+          <section class="game-screen d-none" id="achievements-screen">
+              <!-- O conteúdo será totalmente gerado pelo JavaScript -->
+          </section>
+
+          <!-- TELA DA CIDADE -->
+            <section class="game-screen d-none" id="city-screen">
+                <div class="screen-container">
+                    <h2 class="screen-title">CIDADE</h2>
+                    <p class="screen-description">Onde sua aventura começa e termina</p>
+                    
+                    <div class="city-grid" id="city-grid">
+                        <!-- Locais da cidade serão inseridos aqui via JavaScript -->
+                    </div>
+                    
+                    <button onclick="showScreen('main')" class="btn btn-return">
+                        <span class="btn-icon">⬅️</span> VOLTAR
+                    </button>
+                </div>
+            </section>
+
+        <!-- TELA DE BATALHA -->
+        <section class="game-screen d-none" id="battle-screen">
+          <div class="battle-container">
+            <h2 class="screen-title">COMBATE</h2>
+            
+            <div class="battle-field">
+              <!-- Jogador -->
+              <div class="combatant player-combatant">
+                  <div class="combatant-info">
+                      <h3 class="combatant-name" id="player-name-battle">-</h3>
+                      <div class="combatant-level">Nível: <span id="player-level-battle">1</span></div>
+                      <!-- Adicione ATK e DEF do jogador -->
+                      <div class="combatant-stats">
+                          <span class="stat-atk">⚔️ <span id="player-atk-battle">2</span></span>
+                          <span class="stat-def">🛡️ <span id="player-def-battle">0</span></span>
+                      </div>
+                  </div>
+                  <div class="combatant-avatar">
+                      <img id="player-avatar-img-battle" src="assets/avatars/default.png" alt="Jogador">
+                  </div>
+                  <div class="health-bar">
+                      <div class="health-fill" id="player-health-bar"></div>
+                      <div class="health-text"><span id="player-current-hp">20</span>/<span id="player-total-hp">20</span></div>
+                  </div>
+              </div>
+              
+              <!-- VS -->
+              <div class="vs-indicator">VS</div>
+              
+              <!-- Monstro -->
+              <div class="combatant enemy-combatant">
+                  <div class="combatant-info">
+                      <h3 class="combatant-name" id="monster-name">-</h3>
+                      <div class="combatant-level">Nível: <span id="monster-level">1</span></div>
+                      <!-- Adicione ATK e DEF do monstro -->
+                      <div class="combatant-stats">
+                          <span class="stat-atk">⚔️ <span id="monster-atk-battle">5</span></span>
+                          <span class="stat-def">🛡️ <span id="monster-def-battle">1</span></span>
+                      </div>
+                  </div>
+                  <div class="combatant-avatar">
+                      <img id="monster-img" src="" alt="Monstro">
+                  </div>
+                  <div class="health-bar">
+                      <div id="monster-health-bar" class="health-fill"></div>
+                      <div class="health-text"><span id="monster-current-hp">100</span>/<span id="monster-total-hp">100</span></div>
+                  </div>
+              </div>
+            </div>
+            
+            <div class="battle-actions">
+              <button onclick="attackMonster()" class="btn btn-attack">
+                <span class="btn-icon">⚔️</span> ATACAR
+              </button>
+              <button onclick="showScreen('main')" class="btn btn-escape">
+                <span class="btn-icon">🏃</span> FUGIR
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- TEMPLO -->
+        <section class="game-screen d-none" id="temple-screen">
+          <div class="screen-container">
+            <h2 class="screen-title">TEMPLO DA CURA</h2>
+            <p class="screen-description">Recupere sua saúde gastando moedas</p>
+            
+            <div class="heal-options">
+              <!-- Cura 10% -->
+              <div class="heal-card">
+                <div class="heal-info">
+                  <div class="heal-amount">+10% HP</div>
+                  <div class="heal-cost" id="heal-cost-10">Calculando...</div>
+                </div>
+                <button onclick="healPlayerPercentage(10)" class="btn btn-heal">
+                  <span class="btn-icon">❤️</span> CURAR
+                </button>
+              </div>
+              
+              <!-- Cura 25% -->
+              <div class="heal-card">
+                <div class="heal-info">
+                  <div class="heal-amount">+25% HP</div>
+                  <div class="heal-cost" id="heal-cost-25">Calculando...</div>
+                </div>
+                <button onclick="healPlayerPercentage(25)" class="btn btn-heal">
+                  <span class="btn-icon">❤️</span> CURAR
+                </button>
+              </div>
+              
+              <!-- Cura 50% -->
+              <div class="heal-card">
+                <div class="heal-info">
+                  <div class="heal-amount">+50% HP</div>
+                  <div class="heal-cost" id="heal-cost-50">Calculando...</div>
+                </div>
+                <button onclick="healPlayerPercentage(50)" class="btn btn-heal">
+                  <span class="btn-icon">💓</span> CURAR
+                </button>
+              </div>
+              
+              <!-- Cura 100% -->
+              <div class="heal-card">
+                <div class="heal-info">
+                  <div class="heal-amount">+100% HP</div>
+                  <div class="heal-cost" id="heal-cost-100">Calculando...</div>
+                </div>
+                <button onclick="healPlayerPercentage(100)" class="btn btn-heal">
+                  <span class="btn-icon">💖</span> CURAR
+                </button>
+              </div>
+            </div>
+            
+            <button onclick="showScreen('main')" class="btn btn-return">
+              <span class="btn-icon">⬅️</span> VOLTAR
+            </button>
+          </div>
+        </section>
+
+    <!-- TREINAMENTO -->
+    <section class="game-screen d-none" id="train-screen">
+      <div class="screen-container">
+        <h2 class="screen-title">CENTRO DE TREINAMENTO</h2>
+        <p class="screen-description">Aprimore suas habilidades gastando moedas</p>
+        
+        <div class="training-options">
+          <div class="train-card">
+            <div class="train-info">
+              <div class="train-stat">Dano +1</div>
+              <div class="train-cost"><span id="damage-cost">10</span> Moedas</div>
+              <div class="train-desc">Aumenta seu poder de ataque</div>
+            </div>
+            <button onclick="trainStat('damage')" class="btn btn-upgrade">
+              <span class="btn-icon">⚡</span> MELHORAR
+            </button>
+          </div>
+          
+          <div class="train-card">
+            <div class="train-info">
+              <div class="train-stat">Vida +5</div>
+              <div class="train-cost"><span id="hp-cost">20</span> Moedas</div>
+              <div class="train-desc">Aumenta sua saúde máxima</div>
+            </div>
+            <button onclick="trainStat('maxHp')" class="btn btn-upgrade">
+              <span class="btn-icon">🛡️</span> MELHORAR
+            </button>
+          </div>
+          
+          <div class="train-card">
+            <div class="train-info">
+              <div class="train-stat">Defesa +1</div>
+              <div class="train-cost"><span id="defense-cost">50</span> Moedas</div>
+              <div class="train-desc">Reduz dano recebido</div>
+            </div>
+            <button onclick="trainStat('defense')" class="btn btn-upgrade">
+              <span class="btn-icon">🔰</span> MELHORAR
+            </button>
+          </div>
+        </div>
+        
+        <div class="price-notice">
+          <p>Os preços aumentam em 25% após cada melhoria!</p>
+        </div>
+        
+        <button onclick="showScreen('main')" class="btn btn-return">
+          <span class="btn-icon">⬅️</span> VOLTAR
+        </button>
+      </div>
+    </section>
+
+    <!-- MISSÕES -->
+    <section class="game-screen d-none" id="quests-screen">
+      <div class="screen-container">
+        <h2 class="screen-title">MISSÕES</h2>
+        
+        <!-- Abas -->
+        <div class="quest-tabs">
+          <button class="tab-btn active" data-tab="active">Ativas</button>
+          <button class="tab-btn" data-tab="available">Disponíveis</button>
+          <button class="tab-btn" data-tab="completed">Completas</button>
+        </div>
+        
+        <!-- Conteúdo das abas -->
+        <div class="tab-content active" id="active-tab">
+          <div class="quest-list" id="active-quests-list">
+            <!-- Missões ativas serão inseridas aqui via JS -->
+            <div class="empty-state">
+              <p>Nenhuma missão ativa no momento</p>
+              <button class="btn btn-available-tab">Ver missões disponíveis</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content" id="available-tab">
+          <div class="quest-list" id="available-quests-list">
+            <!-- Missões disponíveis serão inseridas aqui via JS -->
+          </div>
+        </div>
+        
+        <div class="tab-content" id="completed-tab">
+          <div class="quest-list" id="completed-quests-list">
+            <!-- Missões completadas serão inseridas aqui via JS -->
+          </div>
+        </div>
+        
+        <button onclick="showScreen('main')" class="btn btn-return">
+          <span class="btn-icon">⬅️</span> VOLTAR
+        </button>
+      </div>
+    </section>
+
+    <!-- SELEÇÃO DE ARENA -->
+    <section class="game-screen d-none" id="arena-select-screen">
+        <div class="screen-container">
+            <h2 class="screen-title">LOCAIS DE BATALHA</h2>
+            <p class="screen-description">Cada local possui monstros únicos!</p>
+            
+            <div class="arena-grid" id="locations-grid">
+                <!-- Os locais serão inseridos aqui via JavaScript -->
+            </div>
+            
+            <button onclick="showScreen('main')" class="btn btn-return">
+                <span class="btn-icon">⬅️</span> VOLTAR
+            </button>
+        </div>
+    </section>
+
+    <!-- SELEÇÃO DE MONSTROS -->
+    <section class="game-screen d-none" id="monster-select-screen">
+      <div class="screen-container">
+        <h2 class="screen-title" id="monster-select-title">MONSTROS DA FLORESTA</h2>
+        
+        <div class="stamina-info">
+          <span class="stamina-icon">⚡</span>
+          <span class="stamina-text">Energia: <span id="current-stamina-display">20</span></span>
+        </div>
+        
+        <div class="monster-grid" id="monster-selection-grid">
+          <!-- Monstros serão inseridos aqui via JavaScript -->
+        </div>
+        
+        <button onclick="showScreen('arena-select')" class="btn btn-return">
+          <span class="btn-icon">⬅️</span> VOLTAR
+        </button>
+      </div>
+    </section>
+
+         <!-- INVENTÁRIO -->
+          <section class="game-screen d-none" id="inventory-screen">
+              <div class="screen-container">
+                  <h2 class="screen-title">INVENTÁRIO</h2>
+                  
+                  <div class="equipped-section">
+                      <h4 class="equipped-title">EQUIPADO</h4>
+                      <div class="inventory-grid" id="equipped-items">
+                          <!-- Itens equipados serão inseridos aqui -->
+                      </div>
+                  </div>
+                  
+                  <div class="inventory-tabs">
+                      <button class="inventory-tab active" data-category="weapons">Armas ⚔️</button>
+                      <button class="inventory-tab" data-category="armor">Armaduras 🛡️</button>
+                      <button class="inventory-tab" data-category="consumables">Consumíveis 🧪</button>
+                  </div>
+                  
+                  <div class="inventory-content">
+                      <div class="inventory-category" id="weapons-list">
+                          <!-- Armas serão inseridas aqui -->
+                      </div>
+                      
+                      <div class="inventory-category" id="armor-list">
+                          <!-- Armaduras serão inseridas aqui -->
+                      </div>
+                      
+                      <div class="inventory-category" id="consumables-list">
+                          <!-- Consumíveis serão inseridas aqui -->
+                      </div>
+                  </div>
+                  
+                  <button onclick="showScreen('main')" class="btn btn-return">
+                      <span class="btn-icon">⬅️</span> VOLTAR
+                  </button>
+
+                  <button onclick="showSellScreen()" class="btn btn-sell">
+                    <span class="btn-icon">💰</span> VENDER ITENS
+                  </button>
+              </div>
+          </section>
+
+          <!-- TELA DE TRABALHO -->
+          <section class="game-screen d-none" id="work-screen">
+              <div class="screen-container">
+                  <h2 class="screen-title">AGÊNCIA DE TRABALHO</h2>
+                  <p class="screen-description">Trabalhe para ganhar moedas e XP</p>
+                  
+                  <div id="work-status" class="work-status"></div>
+                  
+                  <div class="work-grid" id="work-grid">
+                      <!-- Trabalhos serão inseridos aqui via JavaScript -->
+                  </div>
+                  
+                  <button onclick="showScreen('city')" class="btn btn-return">
+                      <span class="btn-icon">⬅️</span> VOLTAR
+                  </button>
+              </div>
+          </section>
+
+          <!-- TELA DA LOJA -->
+          <section class="game-screen d-none" id="shop-screen">
+            <div class="screen-container">
+              <h2 class="screen-title">LOJA DO AVENTUREIRO</h2>
+              <p class="screen-description">Compre itens para fortalecer seu herói</p>
+              
+              <div class="shop-header">
+                <div class="coins-display">
+                  <span class="coins-icon">💰</span>
+                  <span class="coins-amount" id="shop-coins-display">${player.coins.toLocaleString()}</span>
+                </div>
+                <button onclick="refreshShop()" class="btn btn-refresh-shop">
+                  <span class="btn-icon">🔄</span> Atualizar
+                </button>
+              </div>
+              
+              <div class="shop-content" id="shop-items-container">
+                <!-- Itens da loja serão inseridos aqui via JavaScript -->
+              </div>
+              
+              <button onclick="showScreen('main')" class="btn btn-return">
+                <span class="btn-icon">⬅️</span> VOLTAR
+              </button>
+            </div>
+          </section>
+
+        <!-- TELA DE ALCHEMIA -->
+        <section class="game-screen d-none" id="alchemy-screen">
+            <!-- O conteúdo será gerado dinamicamente pelo JavaScript -->
+        </section>
+  </main>
+
+<!-- Remova type="module" e ajuste a ordem dos scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- Adicione os scripts na ordem correta de dependências -->
+<script src="items/weapons.js"></script>
+<script src="items/armor.js"></script>
+<script src="items/consumables.js"></script>
+<script src="items/materials.js"></script>
+<script src="items/special.js"></script>
+<script src="items/index.js"></script>
+<script src="monsters.js"></script>
+<script src="quests.js"></script>
+<script src="locations.js"></script>
+<script src="city.js"></script>
+<script src="achievements.js"></script>
+<script src="work.js"></script>
+<script src="alchemy.js"></script>
+<script src="inventory.js"></script>
+<script src="shop.js"></script>
+<script src="classe.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,314 @@
+/* === ACHIEVEMENTS SYSTEM === */
+
+/* Achievement Notification */
+.achievement-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 100%;
+  max-width: 350px;
+  background: linear-gradient(135deg, rgba(40, 40, 40, 0.95), rgba(30, 30, 30, 0.95));
+  border-radius: var(--border-radius);
+  border-left: 5px solid var(--warning);
+  box-shadow: var(--box-shadow-lg);
+  z-index: 1000;
+  transform: translateX(120%);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.achievement-notification.show {
+  transform: translateX(0);
+}
+
+.achievement-notification-content {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.achievement-icon {
+  font-size: 2.5rem;
+  color: var(--warning);
+  flex-shrink: 0;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-info h4 {
+  font-size: 0.8rem;
+  color: var(--warning);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.achievement-info h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.achievement-info p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Achievements Screen */
+.achievements-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-card {
+  background: rgba(40, 40, 40, 0.8);
+  border-radius: var(--border-radius-sm);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-align: center;
+}
+
+.summary-icon {
+  font-size: 1.5rem;
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Achievements Tabs */
+.achievements-tabs {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.achievements-tabs .tab-btn {
+  flex: 1;
+  min-width: max-content;
+  padding: 0.8rem;
+  background: rgba(40, 40, 40, 0.8);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-secondary);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.achievements-tabs .tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+}
+
+.achievements-tabs .tab-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Achievements Content */
+.achievements-content {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.achievements-tab-content {
+  display: none;
+}
+
+.achievements-tab-content.active {
+  display: block;
+}
+
+/* Achievement Cards */
+.achievement-card {
+  background: rgba(40, 40, 40, 0.8);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  border-left: 4px solid transparent;
+  transition: var(--transition);
+}
+
+.achievement-card.unlocked {
+  border-left-color: var(--warning);
+  background: rgba(40, 40, 40, 0.9);
+}
+
+.achievement-card.hidden {
+  background: rgba(20, 20, 20, 0.8);
+  border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+.achievement-card.hidden .achievement-info h4,
+.achievement-card.hidden .achievement-info p {
+  color: var(--text-disabled);
+  filter: blur(2px);
+}
+
+.achievement-card.hidden .achievement-icon {
+  color: var(--text-disabled);
+}
+
+.achievement-card.hidden:hover {
+  filter: blur(0);
+}
+
+.achievement-card.hidden:hover .achievement-info h4,
+.achievement-card.hidden:hover .achievement-info p {
+  color: var(--text-secondary);
+  filter: blur(0);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.achievement-card.unlocked .achievement-icon {
+  background: rgba(255, 193, 7, 0.2);
+  color: var(--warning);
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-info h4 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.achievement-info p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.achievement-progress {
+  font-size: 0.8rem;
+  color: var(--warning);
+  background: rgba(255, 193, 7, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.achievement-reward {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.reward-stats,
+.reward-coins,
+.reward-title {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.reward-stats {
+  background: rgba(0, 188, 212, 0.1);
+  color: var(--accent);
+}
+
+.reward-coins {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--warning);
+}
+
+.reward-title {
+  background: rgba(156, 39, 176, 0.1);
+  color: #9C27B0;
+}
+
+.achievement-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.7rem;
+  background: var(--warning);
+  color: black;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .achievement-notification {
+    max-width: 300px;
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .achievements-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .achievement-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .achievement-info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .achievement-notification {
+    max-width: calc(100% - 20px);
+  }
+  
+  .achievements-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .achievements-tabs .tab-btn {
+    padding: 0.8rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
